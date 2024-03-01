@@ -7,7 +7,6 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom'
 import { addUser } from '../utils/userSlice'
 import { useDispatch } from 'react-redux'
 
@@ -15,7 +14,6 @@ const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const email = useRef(null)
   const password = useRef(null)
   const name = useRef(null)
@@ -45,7 +43,6 @@ const Login = () => {
             .then(() => {
               const { uid, email, displayName } = auth.currentUser
               dispatch(addUser({ uid, email, displayName }))
-              navigate('/browse')
             })
             .catch((error) => {
               setErrorMessage(error.message)
@@ -62,9 +59,7 @@ const Login = () => {
         email.current.value,
         password.current.value,
       )
-        .then((userCredential) => {
-          navigate('/browse')
-        })
+        .then((userCredential) => {})
         .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
@@ -74,9 +69,9 @@ const Login = () => {
   }
   return (
     <div className='bg-[url("https://assets.nflxext.com/ffe/siteui/vlv3/2e07bc25-8b8f-4531-8e1f-7e5e33938793/e4b3c14a-684b-4fc4-b14f-2b486a4e9f4e/IN-en-20240219-popsignuptwoweeks-perspective_alpha_website_large.jpg")] bg-black/50 w-full h-[100vh]'>
-      <div className="w-full h-[100vh] bg-black/55">
+      <div className="w-full h-[100vh]">
         <Header />
-        <div className="w-4/12 bg-black/55 text-white mx-auto p-14 rounded-md">
+        <div className="w-4/12 bg-black/65 text-white mx-auto absolute top-28 right-0 left-0 p-14 rounded-md">
           <p className="text-4xl mb-6 font-bold">
             {isSignIn ? 'Sign In' : 'Sign Up'}
           </p>

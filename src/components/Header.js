@@ -2,12 +2,16 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeUser } from '../utils/userSlice'
+import { useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import { addUser, removeUser } from '../utils/userSlice'
+import { NETFLIX_LOGO_URL, NETFLIX_USER_ICON_URL } from '../utils/constants'
 
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector((store) => store.user)
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -18,11 +22,26 @@ const Header = () => {
         navigate('/error')
       })
   }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user
+        dispatch(addUser({ uid, email, displayName }))
+        navigate('/browse')
+      } else {
+        dispatch(removeUser())
+        navigate('/')
+      }
+    })
+
+    return () => unsubscribe()
+  }, [])
   return (
-    <div className="flex justify-between ">
+    <div className="z-40 w-full absolute flex justify-between bg-gradient-to-b from-black">
       <img
-        className="z-40 w-44 ml-4 py-1"
-        src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+        className=" w-44 ml-4 py-1"
+        src={NETFLIX_LOGO_URL}
         alt="Netflix-logo"
       />
       {user && (
@@ -30,14 +49,14 @@ const Header = () => {
           <div className="w-24 overflow-hidden">
             <img
               className="w-10 mx-4 mt-4 py-1"
-              src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
+              src={NETFLIX_USER_ICON_URL}
               alt="user-icon"
             />
-            <p>{user?.displayName}</p>
+            <p className="text-white">{user?.displayName}</p>
           </div>
           <button
             onClick={handleSignOut}
-            className="bg-red-500 text-white  m-4 p-4 w-32 h-16 rounded-md"
+            className="bg-red-500 text-white  m-4 px-3 py-2 w-32 h-16 rounded-md"
           >
             Sign Out
           </button>
