@@ -12,6 +12,18 @@ const SecondaryContainer = () => {
           <MovieList title={'Web Series'} movies={movies.webSeries} />
           <MovieList title={'Horror Movies'} movies={movies.horror} />
         </div>
+        <div className="bg-white">
+          <a
+            target="_blank"
+            href="https://icons8.com/icon/VZLXV08EcZsm/netflix"
+          >
+            Netflix
+          </a>
+          icon by
+          <a target="_blank" href="https://icons8.com">
+            Icons8
+          </a>
+        </div>
       </div>
     )
   )

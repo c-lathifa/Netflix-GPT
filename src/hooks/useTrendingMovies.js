@@ -11,7 +11,6 @@ const useTrendingMovies = () => {
       TMDB_API_OPTIONS,
     )
     const json = await data.json()
-    console.log(json.results)
     dispatch(addTrending(json.results))
   }
 

@@ -6,11 +6,13 @@ import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { addUser, removeUser } from '../utils/userSlice'
 import { NETFLIX_LOGO_URL, NETFLIX_USER_ICON_URL } from '../utils/constants'
+import { toggleGptSearchView } from '../utils/gptSlice'
 
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector((store) => store.user)
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
 
   const handleSignOut = () => {
     signOut(auth)
@@ -37,6 +39,10 @@ const Header = () => {
 
     return () => unsubscribe()
   }, [])
+
+  const handleGptSearch = () => {
+    dispatch(toggleGptSearchView())
+  }
   return (
     <div className="z-40 w-full absolute flex justify-between bg-gradient-to-b from-black">
       <img
@@ -46,7 +52,13 @@ const Header = () => {
       />
       {user && (
         <div className="flex">
-          <div className="w-24 overflow-hidden">
+          <button
+            onClick={handleGptSearch}
+            className="bg-black border border-red-500 text-white  m-4 px-6 py-1 rounded-md"
+          >
+            {showGptSearch ? 'Home' : 'GPT Search'}
+          </button>
+          <div className="">
             <img
               className="w-10 mx-4 mt-4 py-1"
               src={NETFLIX_USER_ICON_URL}
@@ -56,7 +68,7 @@ const Header = () => {
           </div>
           <button
             onClick={handleSignOut}
-            className="bg-red-500 text-white  m-4 px-3 py-2 w-32 h-16 rounded-md"
+            className="bg-red-500 text-white  m-4 px-6 py-1 rounded-md"
           >
             Sign Out
           </button>

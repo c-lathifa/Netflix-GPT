@@ -4,7 +4,6 @@ import useTrailer from '../hooks/useTrailer'
 const VideoPlayback = ({ movieId }) => {
   const trailerVideo = useSelector((store) => store.movies.trailerVideo)
   useTrailer(movieId)
-  console.log(trailerVideo?.key)
   return (
     <div className="w-full">
       <iframe
