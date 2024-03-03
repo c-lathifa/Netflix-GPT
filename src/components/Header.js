@@ -45,9 +45,9 @@ const Header = () => {
     dispatch(addGptMovieResult({ movieNames: null, movieResults: null }))
   }
   return (
-    <div className="z-40 w-full absolute flex justify-between bg-gradient-to-b from-black">
+    <div className="z-40 w-full absolute flex flex-col justify-between bg-gradient-to-b from-black md:flex-row">
       <img
-        className=" w-44 ml-4 py-1"
+        className="mx-auto w-44 md:ml-4 md:mx-0 py-1"
         src={NETFLIX_LOGO_URL}
         alt="Netflix-logo"
       />

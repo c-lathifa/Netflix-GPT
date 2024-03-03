@@ -68,10 +68,17 @@ const Login = () => {
     }
   }
   return (
-    <div className='bg-[url("https://assets.nflxext.com/ffe/siteui/vlv3/2e07bc25-8b8f-4531-8e1f-7e5e33938793/e4b3c14a-684b-4fc4-b14f-2b486a4e9f4e/IN-en-20240219-popsignuptwoweeks-perspective_alpha_website_large.jpg")] bg-black/50 w-full h-[100vh]'>
-      <div className="w-full h-[100vh]">
+    <div className="">
+      <div className="w-full h-full">
         <Header />
-        <div className="w-4/12 bg-black/65 text-white mx-auto absolute top-28 right-0 left-0 p-14 rounded-md">
+        <div className="fixed -z-10">
+          <img
+            className="h-screen object-cover md:h-full"
+            src="https://assets.nflxext.com/ffe/siteui/vlv3/2e07bc25-8b8f-4531-8e1f-7e5e33938793/e4b3c14a-684b-4fc4-b14f-2b486a4e9f4e/IN-en-20240219-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+            alt=""
+          />
+        </div>
+        <div className="w-11/12 md:w-4/12 bg-black/65 p-6 text-white mx-auto absolute top-28 right-0 left-0 md:p-14 rounded-md">
           <p className="text-4xl mb-6 font-bold">
             {isSignIn ? 'Sign In' : 'Sign Up'}
           </p>
