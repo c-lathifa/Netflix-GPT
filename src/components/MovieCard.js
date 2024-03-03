@@ -1,5 +1,6 @@
 import { IMG_POSTER_URL } from '../utils/constants'
 const MovieCard = ({ posterPath, title }) => {
+  if (!posterPath) return null
   return (
     <div>
       <div className="w-36 p-2">

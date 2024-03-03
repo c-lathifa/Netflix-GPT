@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { addUser, removeUser } from '../utils/userSlice'
 import { NETFLIX_LOGO_URL, NETFLIX_USER_ICON_URL } from '../utils/constants'
-import { toggleGptSearchView } from '../utils/gptSlice'
+import { addGptMovieResult, toggleGptSearchView } from '../utils/gptSlice'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -42,6 +42,7 @@ const Header = () => {
 
   const handleGptSearch = () => {
     dispatch(toggleGptSearchView())
+    dispatch(addGptMovieResult({ movieNames: null, movieResults: null }))
   }
   return (
     <div className="z-40 w-full absolute flex justify-between bg-gradient-to-b from-black">

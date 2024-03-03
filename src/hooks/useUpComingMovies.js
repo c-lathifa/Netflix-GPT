@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addTrending } from '../utils/movieSlice'
 import { TMDB_API_OPTIONS } from '../utils/constants'
 
 const useTrendingMovies = () => {
   const dispatch = useDispatch()
-
+  const upcoming = useSelector((store) => store.movies.upcoming)
   const getUpComing = async () => {
     const data = await fetch(
       'https://api.themoviedb.org/3/trending/movie/week?language=en-US',
@@ -16,7 +16,7 @@ const useTrendingMovies = () => {
   }
 
   useEffect(() => {
-    getUpComing()
+    !upcoming && getUpComing()
   }, [])
 }
 
