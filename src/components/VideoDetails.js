@@ -1,8 +1,8 @@
 const VideoDetails = ({ title, overview }) => {
   return (
-    <div className="w-full aspect-video  absolute bg-gradient-to-r from-black">
+    <div className="w-full aspect-video  absolute md:bg-gradient-to-r md:from-black">
       <div className="w-4/12 mt-40 md:mt-56 ml-10">
-        <h1 className="text-2xl md:text-5xl text-bold text-white my-2">
+        <h1 className="text-2xl hidden md:text-5xl text-bold text-white my-2">
           {title}
         </h1>
         <p className="hidden md:inline-block my-2 text-white">{overview}</p>

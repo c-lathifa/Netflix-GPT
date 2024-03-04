@@ -9,9 +9,11 @@ import MainContainer from './MainContainer'
 import SecondaryContainer from './SecondaryContainer'
 import GptSearch from './GptSearch'
 import { useSelector } from 'react-redux'
+import MovieTrailerAndDetails from './MovieTrailerAndDetails'
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
+  const movie = useSelector((store) => store.movies.displayMovie)
   useNowPlayingMovies()
   useHorrorMovies()
   usePopularMovies()
@@ -25,6 +27,7 @@ const Browse = () => {
         <GptSearch />
       ) : (
         <>
+          {movie && <MovieTrailerAndDetails />}
           <MainContainer /> <SecondaryContainer />
         </>
       )}

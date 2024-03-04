@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux'
 import GptMovieSuggestions from './GptMovieSuggestions'
 import GptSearchBar from './GptSearchBar'
+import MovieTrailerAndDetails from './MovieTrailerAndDetails'
 
 const GptSearch = () => {
+  const movie = useSelector((store) => store.movies.displayMovie)
   return (
     <div className="">
       <div className="fixed -z-10">
@@ -11,8 +14,14 @@ const GptSearch = () => {
           alt=""
         />
       </div>
-      <GptSearchBar />
-      <GptMovieSuggestions />
+      {movie ? (
+        <MovieTrailerAndDetails />
+      ) : (
+        <>
+          <GptSearchBar />
+          <GptMovieSuggestions />
+        </>
+      )}
     </div>
   )
 }
